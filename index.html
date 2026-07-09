@@ -422,7 +422,7 @@
       <rect x="30" y="40" width="110" height="30" rx="14" fill="#5c2461"/>
       <path d="M140 65h20a20 20 0 0 1 0 40h-20" stroke="#5c2461" stroke-width="10" fill="none"/>
       <path d="M55 100c8 10 22 10 30 0 8 10 22 10 30 0" stroke="#fff7c0" stroke-width="4" stroke-linecap="round" fill="none"/>
-      <text x="85" y="130" font-family="Cormorant Garamond, serif" font-style="italic" font-size="15" fill="#fff7c0">você é capaz</text>
+      <text x="85" y="128" font-family="Cormorant Garamond, serif" font-style="italic" font-size="13" fill="#fff7c0" text-anchor="middle">você é capaz</text>
     </svg>
   </div>
 
@@ -617,7 +617,7 @@ function loadNextBatch(){
   shown += next.length;
 
   if(shown >= allProducts.length){
-    status.textContent = "Você viu todas as canecas por enquanto 💜 novidades toda semana!";
+    status.innerHTML = 'Veja mais no <a href="https://www.instagram.com/r.ipersonalizados" target="_blank" rel="noopener" style="color:var(--purple); font-weight:700; text-decoration:underline;">Instagram</a> 💜';
   } else {
     status.innerHTML = '<div class="spinner"></div>Carregando mais canecas...';
   }

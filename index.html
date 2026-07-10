@@ -661,12 +661,13 @@ if(SHEET_CSV_URL.startsWith('http')){
     download: true,
     header: true,
     skipEmptyLines: true,
+    transformHeader: (h) => h.trim().toLowerCase(),
     complete: (results) => {
       const rows = results.data.map(r => ({
-        nome: r.nome || r.Nome || '',
-        preco: r.preco || r.Preco || r['Preço'] || '',
-        imagem: r.imagem || r.Imagem || '',
-        whatsapp: r.whatsapp || r.Whatsapp || ''
+        nome: (r.nome || '').trim(),
+        preco: (r.preco || r['preço'] || '').trim(),
+        imagem: (r.imagem || '').trim(),
+        whatsapp: (r.whatsapp || '').trim()
       }));
       initProducts(rows.length ? rows : fallbackProducts);
     },

@@ -561,6 +561,18 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRiAzPwQf
 const DEFAULT_WPP = "5554984127018";
 const DEFAULT_MSG = "Ol\u00e1! \ud83d\ude0a Vim pelo site Autoestima na Caneca. Gostei da caneca";
 
+// Garante que caminhos relativos (ex: "imagens/001.png") funcionem
+// independente de como a URL do GitHub Pages foi acessada (com ou sem barra final).
+const BASE_PATH = location.pathname.endsWith('/')
+  ? location.pathname
+  : location.pathname.replace(/[^/]*$/, '');
+
+function resolveImagePath(raw){
+  if(!raw) return '';
+  if(/^(https?:)?\/\//i.test(raw) || raw.startsWith('data:')) return raw; // link absoluto, usa direto
+  return BASE_PATH + raw.replace(/^\//, '');
+}
+
 const grid = document.getElementById('productGrid');
 const status = document.getElementById('gridStatus');
 
@@ -592,7 +604,7 @@ function buildWppLink(prod){
 function renderCard(prod){
   const card = document.createElement('div');
   card.className = 'card';
-  const img = prod.imagem && prod.imagem.trim() ? prod.imagem.trim() : placeholderSVG(prod.nome);
+  const img = prod.imagem && prod.imagem.trim() ? resolveImagePath(prod.imagem.trim()) : placeholderSVG(prod.nome);
 
   card.innerHTML = `
     <div class="card-img" data-full="${img}" data-caption="${prod.nome || ''}">

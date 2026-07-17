@@ -706,7 +706,7 @@ function loadNextBatch(){
 function initProducts(list){
   if(list.length > 1){
     const featured = list[list.length - 1];
-    allProducts = list.slice(0, -1);
+    allProducts = list.slice(0, -1).reverse();
     renderFeatured(featured);
   } else {
     allProducts = list;
